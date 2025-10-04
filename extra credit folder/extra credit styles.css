@@ -1,0 +1,95 @@
+/* Metal Kitty CSS (external stylesheet)
+   - Black background with animated flames
+   - Gothic (blackletter) heading that says "Metal Kitty"
+   - Safe defaults that WON'T break your gallery grid
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+
+:root{
+  --fire-1:#ff3300; /* ember */
+  --fire-2:#ff6600; /* flame */
+  --fire-3:#ff0000; /* core */
+  --text:#f5e9df;   /* warm pale */
+}
+
+/* Page background */
+html,body{height:100%;}
+body{
+  margin:0;
+  min-height:100vh;
+  background:black url('https://i.ibb.co/pPP7Ryx/flames-bg.gif') center/cover fixed no-repeat;
+  color:var(--text);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+
+/* Optional overlay to boost text contrast over bright flames */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:radial-gradient(1200px 700px at 50% -10%, rgba(0,0,0,.0), rgba(0,0,0,.55) 60%, rgba(0,0,0,.75));
+}
+
+/* Container helpers */
+.container{max-width:1100px;margin:0 auto;padding:24px;}
+
+/* Gothic title */
+h1{
+  font-family:'UnifrakturCook', system-ui, serif;
+  font-size:clamp(2.5rem, 6vw, 6rem);
+  line-height:1.05;
+  letter-spacing:.5px;
+  margin:32px auto 8px;
+  text-align:center;
+  color:var(--text);
+  /* fire glow */
+  text-shadow:
+    0 0 6px var(--fire-1),
+    0 0 14px var(--fire-2),
+    0 0 28px var(--fire-3),
+    0 2px 0 rgba(0,0,0,.65);
+  animation:flicker 1.6s infinite ease-in-out alternate;
+}
+
+.subtitle{ text-align:center; margin:0 auto 18px; opacity:.9 }
+
+@keyframes flicker{
+  0%{ text-shadow:0 0 4px var(--fire-1),0 0 10px var(--fire-2),0 0 18px var(--fire-3) }
+  50%{ text-shadow:0 0 10px var(--fire-2),0 0 24px var(--fire-1),0 0 36px var(--fire-3) }
+  100%{ text-shadow:0 0 6px var(--fire-1),0 0 16px var(--fire-2),0 0 28px var(--fire-3) }
+}
+
+/* Image safety defaults so pictures always show */
+img{display:block;max-width:100%;height:auto}
+
+/* Simple responsive gallery grid */
+.gallery{
+  max-width:1100px;
+  margin: 12px auto 40px;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap:18px;
+  padding:0 8px 8px;
+}
+
+.gallery figure{
+  margin:0;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.2);
+}
+
+.gallery img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+.gallery figcaption{
+  color:#ffd4c2;
+  background:linear-gradient(180deg,rgba(0,0,0,.0),rgba(0,0,0,.35));
+  border-top:1px solid rgba(255,255,255,.1);
+  padding:10px 12px;
+  font-size:0.95rem;
+}
